@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
+
     @BeforeAll
-    static void setup() {
+    static void setupBeforeAll() {
 
-        if (System.getProperty("stage") != null) {
-
+        if (System.getProperty("env") != null) {
             WebDriverConfig config = ConfigFactory
                     .create(WebDriverConfig.class, System.getProperties());
 
@@ -22,11 +22,12 @@ public class TestBase {
             Configuration.browserCapabilities = capabilities;
             Configuration.browser = config.getBrowser();
             Configuration.browserVersion = config.getVersion();
+            Configuration.startMaximized = true;
 
             if (config.isRemote()) {
                 String user = config.getSelenoidUser();
                 String pass = config.getSelenoidPass();
-                String url = config.getSelenoidUrl();
+                String url = config.getRemoteUrl();
                 Configuration.remote = String.format("https://%s:%s@%s", user, pass, url);
             }
         }
