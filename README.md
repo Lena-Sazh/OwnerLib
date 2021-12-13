@@ -13,3 +13,8 @@ gradle clean test -Denv=local
 ```b
 gradle clean test -Denv=remote
 ```
+
+* API
+```b
+gradle clean api_test -Dcookie=6aca33e1-f9db-4f9a-8139-40406680d2ce
+```
