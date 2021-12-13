@@ -1,5 +1,6 @@
 package practice.tests;
 
+import practice.config.APIConfig;
 import practice.config.WebDriverConfig;
 import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
@@ -7,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
+
+    public APIConfig config = ConfigFactory.create(APIConfig.class, System.getProperties());
 
     @BeforeAll
     static void setupBeforeAll() {

@@ -14,12 +14,14 @@ def selenideVersion = "5.24.0",
 dependencies {
     testImplementation(
             "org.aspectj:aspectjweaver:1.9.7",
-            'org.seleniumhq.selenium:selenium-java:3.141.59',
+            "org.seleniumhq.selenium:selenium-java:3.141.59",
             "com.codeborne:selenide:$selenideVersion",
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.19.0",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "io.qameta.allure:allure-selenide:2.15.0")
+            "io.qameta.allure:allure-selenide:2.15.0",
+            "org.junit.jupiter:junit-jupiter-api:5.8.2",
+            "io.rest-assured:rest-assured:4.4.0",)
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.32",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
@@ -52,3 +54,22 @@ tasks.withType(Test) {
         }
     }
 }
+
+task ui_test(type: Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform {
+        includeTags "ui"
+    }
+}
+
+task api_test(type: Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform {
+        includeTags "api"
+    }
+}
+
+tasks.create ("startAll") {
+    group = "tests"
+}.dependsOn("ui_test", "api_test")
+
