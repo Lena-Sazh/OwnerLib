@@ -7,11 +7,11 @@ To run tests we can pass params via -D command in Terminal
 
 * Locally
 ```b
-gradle clean test -Denv=local
+gradle clean ui_test -Denv=local
 ```
 * Remote
 ```b
-gradle clean test -Denv=remote
+gradle clean ui_test -Denv=remote
 ```
 
 * API
